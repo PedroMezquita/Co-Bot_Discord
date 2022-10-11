@@ -1,8 +1,23 @@
-def handle_respone(message) -> str:
+import database
+
+def handle_respone(message, author) -> str:
   p_message = message.lower()
+  res = p_message.split()
+  p_command = str(res[0])
 
-  if p_message == '$hey':
-    return 'Yo !'
+  match p_command:
+    case '$hey':
+      return 'Yo !'
+    
+    case '$help':
+      return 'Help'
 
-  if p_message == '$help':
-    return 'Help'
+    case '$buy':
+      data = database.DataBase()
+      response = data.buy(message, author)
+      return response
+
+    case '$shop':
+      data = database.DataBase()
+      response = data.shop()
+      return response
