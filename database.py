@@ -52,3 +52,27 @@ class DataBase:
         except Exception as e:
             return str(e)
 
+    def clear_list(self, message):
+        try:
+            self.connection()
+            message.pop(0)
+            print(message)
+            req = "DELETE FROM SHOPPING_LIST"
+            response=""
+            for element in message:
+                if element == message[0]:
+                    req += f" WHERE NAME='{str(element)}'"
+                else:
+                    req += f" OR NAME='{str(element)}'"
+                response += f"{str(element)} cleared !\n"
+            print(req)
+            self.cursor.execute(req)
+            self.cursor.close()
+            self.mydb.close()
+            if response=="":
+                return "List cleared !" 
+            else:
+                return response
+        except Exception as e:
+            return str(e)
+

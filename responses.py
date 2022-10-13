@@ -21,3 +21,8 @@ def handle_respone(message, author) -> str:
       data = database.DataBase()
       response = data.shop()
       return response
+
+    case '$clear_list':
+      data = database.DataBase()
+      reponse = data.clear_list(res)
+      return reponse
